@@ -1,0 +1,100 @@
+{% extends 'admin-template.html' %} {% block content %}
+
+<!-- partial -->
+<div class="main-panel">
+  {% if page == 'product-edit' %}
+  <div class="content-wrapper">
+    <div class="row">
+      <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">{{product.name}}</h4>
+
+            <form
+              class="forms-sample"
+              method="post"
+              enctype="multipart/form-data"
+            >
+              {% csrf_token %} {% for field in forms %}
+              <div class="form-group">
+                <label for="exampleInputName1">{{field.label}}</label>
+                {{field}}
+              </div>
+              {% endfor %}
+
+              <button type="submit" class="btn btn-primary mr-2">Submit</button>
+              <button class="btn btn-light">Cancel</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- partial -->
+    </div>
+    <!-- main-panel ends -->
+  </div>
+  {% endif %} {% if page == 'product-create' %}
+  <div class="content-wrapper">
+    <div class="row">
+      <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">{{product.name}}</h4>
+
+            <form
+              class="forms-sample"
+              method="post"
+              enctype="multipart/form-data"
+            >
+              {% csrf_token %} {% for field in forms %}
+              <div class="form-group">
+                <label for="exampleInputName1">{{field.label}}</label>
+                {{field}}
+              </div>
+              {% endfor %}
+
+              <button type="submit" class="btn btn-primary mr-2">Submit</button>
+              <button class="btn btn-light">Cancel</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- partial -->
+    </div>
+    <!-- main-panel ends -->
+  </div>
+  {% endif %} {% if page == 'createCategory' %}
+  <div class="content-wrapper">
+    <div class="row">
+      <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">Add a Specification</h4>
+
+            <form
+              class="forms-sample"
+              method="post"
+              enctype="multipart/form-data"
+            >
+              {% csrf_token %} {% for field in forms %}
+              <div class="form-group">
+                <label for="exampleInputName1">{{field.label}}</label>
+                {{field}}
+              </div>
+              {% endfor %}
+
+              <button type="submit" class="btn btn-primary mr-2">Submit</button>
+              <button class="btn btn-light">Cancel</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- partial -->
+    </div>
+    <!-- main-panel ends -->
+  </div>
+  {% endif %}
+</div>
+{% endblock content %}

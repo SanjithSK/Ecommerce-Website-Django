@@ -1,0 +1,43 @@
+{% extends 'admin-template.html' %} {% block content %}
+<style>
+  /* Custom CSS to center the card */
+  .centered-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Make sure the container is at least the full viewport height */
+  }
+
+  /* Center the card horizontally */
+  .newsletter-card {
+    width: 300px; /* Adjust the width as needed */
+    position: relative;
+  }
+
+  .card-body {
+    text-align: center;
+  }
+</style>
+<div class="centered-container">
+  <div class="d-flex justify-content-center align-items-center min-vh-100">
+    <div class="card newsletter-card bg-gradient-warning">
+      <div class="card-body">
+        <h5 class="mb-3 text-white">Delete Product</h5>
+        <p>Are you sure you want to delete the {{object}} ''?</p>
+        <form method="post">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-danger btn-rounded mt-1">
+            Delete
+          </button>
+          <a
+            href="{% url 'admin-productList' %}"
+            class="btn btn-secondary btn-rounded mt-1"
+            >Cancel</a
+          >
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
