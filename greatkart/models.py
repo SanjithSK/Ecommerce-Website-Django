@@ -21,7 +21,9 @@ class CartItem(models.Model):
     tax = models.DecimalField(max_digits=10, decimal_places=2, default=0)
 
     def sub_total(self):
-        return self.product.sale_price * self.quantity
+        total_before_tax = self.product.sale_price * self.quantity
+        total_with_tax = total_before_tax + self.tax
+        return total_with_tax
 
     def __str__(self):
         return str(self.product)

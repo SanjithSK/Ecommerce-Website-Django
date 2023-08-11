@@ -14,3 +14,7 @@ admin.site.register(Review)
 
 admin.site.register(tag)
 admin.site.register(brand)
+
+
+class ProductAdmin(admin.ModelAdmin):
+    pass
