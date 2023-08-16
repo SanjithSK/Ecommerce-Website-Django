@@ -14,6 +14,9 @@
       type="image/x-icon"
       href="assets/img/logo/favicon.ico"
     />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Jost:wght@200&display=swap");
+    </style>
 
     <!-- CSS here -->
     <link rel="stylesheet" href="{% static 'assets/css/bootstrap.css' %}" />
@@ -26,7 +29,7 @@
     />
     <link
       rel="stylesheet"
-      href="{% static 'assets/css/font-awesome-pro.css'  %}"
+      href="{% static 'assets/css/font-awesome-pro.css' %}"
     />
     <link
       rel="stylesheet"
@@ -34,11 +37,9 @@
     />
     <link rel="stylesheet" href="{% static 'assets/css/spacing.css' %}" />
     <link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
-    <link rel="stylesheet" href="{% static 'path/to/owl.carousel.min.css' %}" />
-    <link
-      rel="stylesheet"
-      href="{% static 'path/to/owl.theme.default.min.css' % }"
-    />
+    <link rel="stylesheet" href="path/to/owl.carousel.min.css" />
+    <link rel="stylesheet" href="path/to/owl.theme.default.min.css" />
+    <link href="{% static 'banner/css/styles.css' %}" rel="stylesheet" />
   </head>
   <body>
     <!--[if lte IE 9]>
@@ -396,7 +397,10 @@
     <header>
       <div class="tp-header-area p-relative z-index-11">
         <!-- header top start  -->
-        <div class="tp-header-top p-relative z-index-1 d-none d-md-block">
+        <div
+          class="tp-header-top p-relative z-index-1 d-none d-md-block"
+          style="background-color: #55508b"
+        >
           <div class="container">
             <div class="row align-items-center">
               <div class="col-md-6">
@@ -405,13 +409,13 @@
                     <a href="#" style="color: #fff">
                       <i
                         class="fa-solid fa-envelope"
-                        style="color: #f36b3c"
+                        style="color: #f34c9a"
                       ></i>
                       demo@gmail.com
                     </a>
                   </div>
                   <span
-                    ><i class="fa-solid fa-phone" style="color: #f36b3c"></i>
+                    ><i class="fa-solid fa-phone" style="color: #f34c9a"></i>
                   </span>
                   <p>+919012824568</p>
                 </div>
@@ -463,25 +467,23 @@
                       </ul>
                     </div> -->
                     <div class="tp-header-top-menu-item tp-header-setting">
-                      <span
+                      {% if request.user.is_authenticated %}
+                      <a
                         class="tp-header-setting-toggle"
                         id="tp-header-setting-toggle"
-                        >Setting</span
+                        href="{% url 'logout' %}"
+                        style="color: #fff"
+                        >Logut</a
                       >
-                      <ul>
-                        <li>
-                          <a href="profile.html">My Profile</a>
-                        </li>
-                        <li>
-                          <a href="wishlist.html">Wishlist</a>
-                        </li>
-                        <li>
-                          <a href="cart.html">Cart</a>
-                        </li>
-                        <li>
-                          <a href="login.html">Logout</a>
-                        </li>
-                      </ul>
+                      {% else %}
+                      <a
+                        class="tp-header-setting-toggle"
+                        id="tp-header-setting-toggle"
+                        href="{% url 'login' %}"
+                        style="color: #fff"
+                        >Login</a
+                      >
+                      {% endif %}
                     </div>
                   </div>
                 </div>
@@ -665,10 +667,9 @@
                       </a>
                     </div>
                     <div class="tp-header-action-item">
-                      <a
+                      <button
                         type="button"
                         class="tp-header-action-btn cartmini-open-btn"
-                        href="{% url 'cart' %}"
                       >
                         <svg
                           width="21"
@@ -708,10 +709,8 @@
                             stroke-linejoin="round"
                           />
                         </svg>
-                        <span class="tp-header-action-badge"
-                          >{{cart_count}}</span
-                        >
-                      </a>
+                        <span class="tp-header-action-badge">13</span>
+                      </button>
                     </div>
                     <div class="tp-header-action-item d-lg-none">
                       <button
@@ -1996,10 +1995,9 @@
                   </a>
                 </div>
                 <div class="tp-header-action-item">
-                  <a
+                  <button
                     type="button"
                     class="tp-header-action-btn cartmini-open-btn"
-                    href="{% url 'cart' %}"
                   >
                     <svg
                       width="21"
@@ -2039,8 +2037,8 @@
                         stroke-linejoin="round"
                       />
                     </svg>
-                    <span class="tp-header-action-badge">{{cart_count}}</span>
-                  </a>
+                    <span class="tp-header-action-badge">13</span>
+                  </button>
                 </div>
                 <div class="tp-header-action-item d-lg-none">
                   <button
@@ -2280,7 +2278,7 @@
     <script src="{% static 'assets/js/bootstrap-bundle.js' %}"></script>
     <script src="{% static 'assets/js/meanmenu.js' %}"></script>
     <script src="{% static 'assets/js/swiper-bundle.js' %}"></script>
-    <script src="{%  static 'assets/js/slick.js' %}"></script>
+    <script src="{% static 'assets/js/slick.js' %}"></script>
     <script src="{% static 'assets/js/range-slider.js' %}"></script>
     <script src="{% static 'assets/js/magnific-popup.js' %}"></script>
     <script src="{% static 'assets/js/nice-select.js' %}"></script>

@@ -1,0 +1,6 @@
+<h1>Teest</h1>
+<form method="post">
+  {% csrf_token %} {{ form.as_p }}
+  <!-- This will render all form fields as paragraphs -->
+  <button type="submit">Register</button>
+</form>

@@ -129,8 +129,6 @@
 .tp-return-customer-forgot a::after,
 .tp-cart-checkout-shipping-option label::after,
 .tp-cart-checkout-shipping-option label::before,
-.tp-cart-plus,
-.tp-cart-minus,
 .tp-shop-widget-categories ul li a::after,
 .tp-shop-widget-categories ul li a span,
 .tp-shop-widget-checkbox-circle-number,
@@ -15323,7 +15321,7 @@ div.tp-author-info-avater img {
   padding: 0;
 }
 .cartmini__content .tp-product-quantity .tp-cart-plus,
-.cartmini__content .tp-product-quantity .tp-cart-minus {
+.cartmini__content .tp-product-quantity .tp-cart-minus{
   width: 20px;
   height: 30px;
   line-height: 30px;
@@ -15332,8 +15330,8 @@ div.tp-author-info-avater img {
   font-size: 13px;
   left: 3px;
 }
-.cartmini__content .tp-product-quantity .tp-cart-plus svg,
-.cartmini__content .tp-product-quantity .tp-cart-minus svg {
+.cartmini__content .tp-product-quantity svg,
+.cartmini__content .tp-product-quantity svg {
   -webkit-transform: translateY(-1px);
   -moz-transform: translateY(-1px);
   -ms-transform: translateY(-1px);
@@ -15341,8 +15339,8 @@ div.tp-author-info-avater img {
   transform: translateY(-1px);
   width: 10px;
 }
-.cartmini__content .tp-product-quantity .tp-cart-plus::after,
-.cartmini__content .tp-product-quantity .tp-cart-minus::after {
+.cartmini__content .tp-product-quantity ,
+.cartmini__content .tp-product-quantity  {
   display: none;
 }
 .cartmini__content .tp-product-quantity .tp-cart-plus {
@@ -18673,7 +18671,7 @@ product all slider
   border-radius: 0;
 }
 .tp-product-details-quantity .tp-cart-plus,
-.tp-product-details-quantity .tp-cart-minus {
+.tp-product-details-quantity .tp-cart-minus{
   width: 24px;
   height: 24px;
   line-height: 24px;
@@ -18682,7 +18680,7 @@ product all slider
   left: 14px;
 }
 .tp-product-details-quantity .tp-cart-plus:hover,
-.tp-product-details-quantity .tp-cart-minus:hover {
+.tp-product-details-quantity .sim-minus:hover {
   background-color: var(--tp-common-white);
   color: var(--tp-theme-primary);
 }
@@ -19556,7 +19554,7 @@ a:hover {
   background-color: var(--tp-common-white);
 }
 .tp-product-details-wrapper-style2 .tp-product-details-quantity .tp-cart-plus,
-.tp-product-details-wrapper-style2 .tp-product-details-quantity .tp-cart-minus {
+.tp-product-details-wrapper-style2 .tp-product-details-quantity .tp-cart-minus{
   left: 4px;
 }
 .tp-product-details-wrapper-style2
@@ -19564,7 +19562,7 @@ a:hover {
   .tp-cart-plus::after,
 .tp-product-details-wrapper-style2
   .tp-product-details-quantity
-  .tp-cart-minus::after {
+  .sim-minus::after {
   position: absolute;
   content: "";
   left: 28px;
@@ -19785,7 +19783,7 @@ a:hover {
 .tp-product-modal-styleDarkRed .tp-product-details-quantity .tp-cart-plus:hover,
 .tp-product-modal-styleDarkRed
   .tp-product-details-quantity
-  .tp-cart-minus:hover {
+  .sim-minus:hover {
   color: var(--tp-theme-secondary);
 }
 .tp-product-modal-styleBrown
@@ -19815,7 +19813,7 @@ a:hover {
   color: var(--tp-theme-brown);
 }
 .tp-product-modal-styleBrown .tp-product-details-quantity .tp-cart-plus:hover,
-.tp-product-modal-styleBrown .tp-product-details-quantity .tp-cart-minus:hover {
+.tp-product-modal-styleBrown .tp-product-details-quantity .sim-minus:hover {
   color: var(--tp-theme-brown);
 }
 .tp-product-modal-styleBrown-2 .tp-product-details-nav-main-thumb img {
@@ -19865,7 +19863,7 @@ a:hover {
   color: var(--tp-theme-green);
 }
 .tp-product-modal-styleGreen .tp-product-details-quantity .tp-cart-plus:hover,
-.tp-product-modal-styleGreen .tp-product-details-quantity .tp-cart-minus:hover {
+.tp-product-modal-styleGreen .tp-product-details-quantity .sim-minus:hover {
   color: var(--tp-theme-green);
 }
 
@@ -20487,7 +20485,7 @@ a:hover {
 }
 
 .tp-cart-plus,
-.tp-cart-minus {
+.tp-cart-minus{
   display: inline-block;
   text-align: center;
   font-size: 16px;
@@ -20502,7 +20500,7 @@ a:hover {
   transform: translateY(-50%);
 }
 .tp-cart-plus svg,
-.tp-cart-minus svg {
+.tp-cart-minussvg {
   -webkit-transform: translateY(-2px);
   -moz-transform: translateY(-2px);
   -ms-transform: translateY(-2px);
@@ -20510,17 +20508,17 @@ a:hover {
   transform: translateY(-2px);
 }
 .tp-cart-plus:hover,
-.tp-cart-minus:hover {
+.sim-minus:hover {
   cursor: pointer;
   color: var(--tp-theme-1);
 }
 .tp-cart-plus.tp-cart-plus,
-.tp-cart-minus.tp-cart-plus {
+.sim-minus.tp-cart-plus {
   left: auto;
   right: 16px;
 }
 .tp-cart-plus.tp-cart-plus::after,
-.tp-cart-minus.tp-cart-plus::after {
+.sim-minus.tp-cart-plus::after {
   left: 0;
   right: auto;
 }

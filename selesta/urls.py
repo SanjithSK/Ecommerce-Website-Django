@@ -9,6 +9,7 @@ urlpatterns = [
     path('', include('sales.urls')),
     path('', include('customadmin.urls')),
     path('', include('greatkart.urls')),
+    path('', include('account.urls')),
 ]
 
 
