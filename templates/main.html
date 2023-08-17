@@ -468,6 +468,7 @@
                     </div> -->
                     <div class="tp-header-top-menu-item tp-header-setting">
                       {% if request.user.is_authenticated %}
+                      
                       <a
                         class="tp-header-setting-toggle"
                         id="tp-header-setting-toggle"
@@ -559,7 +560,7 @@
                   class="tp-header-main-right d-flex align-items-center justify-content-end"
                 >
                   <div class="tp-header-login d-none d-lg-block">
-                    <a href="profile.html" class="d-flex align-items-center">
+                    <a href="{% url 'profile' %}" class="d-flex align-items-center">
                       <div class="tp-header-login-icon">
                         <span>
                           <svg
@@ -593,6 +594,7 @@
                       <div class="tp-header-login-content d-none d-xl-block">
                         {% if request.user.is_authenticated %}
                         <span>Hello, {{request.user}}</span>
+                        <h5 class="tp-header-login-title" href="{% url 'profile' %}" >Your Account</h5>
                         {% else %}
                         <span>Hello, Sign In</span>
                         <h5 class="tp-header-login-title">Your Account</h5>

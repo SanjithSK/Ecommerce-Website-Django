@@ -46,6 +46,7 @@ def cart(request):
         shipping_cost = site_config.shipping_cost
 
     total_with_shipping = total + total_tax + shipping_cost
+    base_total = total
 
     context = {
         'cart_items': cart_items,
@@ -53,6 +54,7 @@ def cart(request):
         'total': total_with_shipping,
         'total_tax': total_tax,
         'shipping_cost': shipping_cost,
+        'base_total': base_total
     }
 
     return render(request, 'sales/cart.html', context)
