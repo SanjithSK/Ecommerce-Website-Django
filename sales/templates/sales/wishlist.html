@@ -1,0 +1,153 @@
+{% extends 'main.html' %}  {% block content %}
+
+    <main>
+      <!-- breadcrumb area start -->
+      <section class="breadcrumb__area include-bg pt-95 pb-50">
+        <div class="container">
+          <div class="row">
+            <div class="col-xxl-12">
+              <div class="breadcrumb__content p-relative z-index-1">
+                <h3 class="breadcrumb__title">Wishlist</h3>
+                <div class="breadcrumb__list">
+                  <span><a href="#">Home</a></span>
+                  <span>Wishlist</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- breadcrumb area end -->
+
+      <!-- cart area start -->
+      <section class="tp-cart-area pb-120">
+        <div class="container">
+          <div class="row">
+            <div class="col-xl-12">
+              <div class="tp-cart-list mb-45 mr-30">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th colspan="2" class="tp-cart-header-product">
+                        Product
+                      </th>
+                      <th class="tp-cart-header-price">Price</th>
+                      <th class="tp-cart-header-quantity">Quantity</th>
+                      <th>Action</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for wishlist_item in wishlist_items %}
+                    <tr>
+                      <!-- img -->
+                      <td class="tp-cart-img">
+                        <a href="product-details.html">
+                          <img
+                            src="{{wishlist_item.product.featured_image.url}}"
+                            alt=""
+                        /></a>
+                      </td>
+                      <!-- title -->
+                      <td class="tp-cart-title">
+                        <a href="product-details.html"
+                          >{{wishlist_item.product}}</a
+                        >
+                      </td>
+                      <!-- price -->
+                      <td class="tp-cart-price"><span>₹{{wishlist_item.sub_total}}</span></td>
+
+                      <!-- quantity -->
+                      <td class="tp-cart-quantity">
+                        <div
+                          class="input-group input-group-sm"
+                          style="margin-left: -3rem"
+                        >
+                          <div class="input-group-prepend">
+                            <a
+                              class="btn btn-light"
+                              href="{% url 'remove-wishlist' wishlist_item.product.id %}"
+                            >
+                              <i
+                                class="fa-solid fa-minus"
+                                style="color: #5851a3"
+                              ></i>
+                            </a>
+                          </div>
+                          <input
+                            type="text"
+                            class="form-control custom-input form-control"
+                            value="{{ wishlist_item.quantity }}"
+                            style="height: 38px"
+                          />
+                          <div class="input-group-append">
+                            <a
+                              class="btn btn-light"
+                              href="{% url 'add-wishlist' wishlist_item.product.id %}"
+                            >
+                              <i
+                                class="fa-solid fa-plus"
+                                style="color: #5851a3"
+                              ></i>
+                            </a>
+                          </div>
+                        </div>
+                      </td>
+
+                      <td class="tp-cart-add-to-cart">
+                        <a
+                        type="submit"
+                        class="tp-btn tp-btn-2 tp-btn-blue"
+                        href="{% url 'add-wishlist-cart' wishlist_item.product.id %}"
+                      >
+                        Add To Cart
+                      </a>
+                      </td>
+
+                      <!-- action -->
+                      <td class="tp-cart-action">
+                        <a class="tp-cart-action-btn" href="{% url 'delete-wishlist-cart' wishlist_item.product.id %}">
+                          <svg
+                            width="10"
+                            height="10"
+                            viewBox="0 0 10 10"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              fill-rule="evenodd"
+                              clip-rule="evenodd"
+                              d="M9.53033 1.53033C9.82322 1.23744 9.82322 0.762563 9.53033 0.46967C9.23744 0.176777 8.76256 0.176777 8.46967 0.46967L5 3.93934L1.53033 0.46967C1.23744 0.176777 0.762563 0.176777 0.46967 0.46967C0.176777 0.762563 0.176777 1.23744 0.46967 1.53033L3.93934 5L0.46967 8.46967C0.176777 8.76256 0.176777 9.23744 0.46967 9.53033C0.762563 9.82322 1.23744 9.82322 1.53033 9.53033L5 6.06066L8.46967 9.53033C8.76256 9.82322 9.23744 9.82322 9.53033 9.53033C9.82322 9.23744 9.82322 8.76256 9.53033 8.46967L6.06066 5L9.53033 1.53033Z"
+                              fill="currentColor"
+                            />
+                          </svg>
+                          <span>Remove</span>
+                        </a>
+                      </td>
+                    </tr>
+                    {% endfor %}
+                    
+                    
+                    
+                  </tbody>
+                </table>
+              </div>
+              <div class="tp-cart-bottom">
+                <div class="row align-items-end">
+                  <div class="col-xl-6 col-md-4">
+                    <div class="tp-cart-update">
+                      <a href="{% url 'cart' %}" class="tp-cart-update-btn kik-button"
+                        >Go To Cart</a
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- cart area end -->
+    </main>
+
+   {% endblock content %}

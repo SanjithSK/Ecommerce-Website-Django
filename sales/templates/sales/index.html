@@ -774,9 +774,10 @@
 
                               <span class="tp-product-tooltip">Quick View</span>
                             </button>
-                            <button
+                            <a
                               type="button"
-                              class="tp-product-action-btn tp-product-add-to-wishlist-btn"
+                              class="tp-product-action-btn tp-product-add-to-wishlist-btn kik-button"
+                              href="{% url 'add-wishlist' product.id %}"
                             >
                               <svg
                                 width="20"
@@ -802,7 +803,7 @@
                               <span class="tp-product-tooltip"
                                 >Add To Wishlist</span
                               >
-                            </button>
+                            </a>
                           </div>
                         </div>
                       </div>

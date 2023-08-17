@@ -591,8 +591,12 @@
                         </span>
                       </div>
                       <div class="tp-header-login-content d-none d-xl-block">
+                        {% if request.user.is_authenticated %}
+                        <span>Hello, {{request.user}}</span>
+                        {% else %}
                         <span>Hello, Sign In</span>
                         <h5 class="tp-header-login-title">Your Account</h5>
+                        {% endif %}
                       </div>
                     </a>
                   </div>
