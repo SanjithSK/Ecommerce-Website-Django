@@ -35,30 +35,22 @@ def product_details(request, pk):
 
 def shop(request):
     categories = Category.objects.all()
-    category = request.GET.get('category')
     brands = brand.objects.all()
     cheap_products = Product.objects.all()
-  
-
-    min_price = request.GET.get('min_price')
-    max_price = request.GET.get('max_price')
-
-    min_price = Decimal(min_price) if min_price else 0
-    max_price = Decimal(max_price) if max_price else Decimal('1000')
 
     products = Product.objects.all()
 
-    sort_by = request.GET.get('sort_by')
-
-    
-
-    in_stock = request.GET.get('in_stock')
-    if in_stock:
-        products = products.filter(total_stock__gt=0)
-    
-    if categories:
+    category = request.GET.get('category')
+    if category:
         products = products.filter(category__name=category)
 
+    min_price = Decimal(request.GET.get('min_price', 0))
+    max_price = Decimal(request.GET.get('max_price', '100000'))
+
+    products = products.filter(
+        sale_price__gte=min_price, sale_price__lte=max_price)
+
+    sort_by = request.GET.get('sort_by')
     if sort_by == 'price_low_high':
         products = products.order_by('sale_price')
     elif sort_by == 'price_high_low':
@@ -66,16 +58,9 @@ def shop(request):
     elif sort_by == 'created':
         products = products.order_by('-created_date')
 
-
-    min_price = request.GET.get('min_price')
-    max_price = request.GET.get('max_price')
-
-    if min_price and max_price:
-        products = products.filter(sale_price__gte=min_price, sale_price__lte=max_price)
-        
-    
-
-    
+    in_stock = request.GET.get('in_stock')
+    if in_stock:
+        products = products.filter(total_stock__gt=0)
 
     sorting_options = [
         {'value': '', 'label': 'Default sorting'},
@@ -87,14 +72,12 @@ def shop(request):
     context = {
         'products': products,
         'categories': categories,
-        'brands' : brands,
+        'brands': brands,
         'cheap_products': cheap_products,
-       
-        
         'sorting_options': sorting_options,
         'selected_sort': sort_by,
+        'selected_category': category,
         'min_price': min_price,
         'max_price': max_price,
-       
     }
     return render(request, 'sales/shop.html', context)

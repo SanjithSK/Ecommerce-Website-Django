@@ -59,6 +59,7 @@ def cart(request):
 
     return render(request, 'sales/cart.html', context)
 
+
 def add_cart(request, pk):
     product = Product.objects.get(id=pk)
     try:
@@ -109,31 +110,25 @@ def remove_cart(request, pk):
 def delete_cart_item(request, pk):
     cart = Cart.objects.get(cart_id=_cart_id(request))
     product = get_object_or_404(Product, id=pk)
-    
+
     try:
         cart_item = CartItem.objects.get(cart=cart, product=product)
         cart_item.delete()
 
         # Reactivate the corresponding WishlistItem
-        try:
-            wishlist_item = WishlistItem.objects.get(product=product, wishlist=request.user.wishlist)
-            wishlist_item.is_active = True
-            wishlist_item.save()
-        except WishlistItem.DoesNotExist:
-            pass  # Handle the case where wishlist item doesn't exist
+        if request.user.is_authenticated and hasattr(request.user, 'wishlist'):
+            try:
+                wishlist_item = WishlistItem.objects.get(
+                    product=product, wishlist=request.user.wishlist)
+                wishlist_item.is_active = True
+                wishlist_item.save()
+            except WishlistItem.DoesNotExist:
+                pass  # Handle the case where wishlist item doesn't exist
 
     except CartItem.DoesNotExist:
         pass  # Handle the case where cart item doesn't exist
 
     return redirect('cart')
-
-
-
-
-
-
-
-
 
 
 @login_required(login_url='login')
@@ -144,11 +139,14 @@ def wishlist(request):
     total_tax = 0
 
     try:
-        wishlist = Wishlist.objects.get(user=request.user)  # Use request.user directly
-        wishlist_items =  WishlistItem.objects.filter(wishlist=wishlist, is_active=True)
+        wishlist = Wishlist.objects.get(
+            user=request.user)  # Use request.user directly
+        wishlist_items = WishlistItem.objects.filter(
+            wishlist=wishlist, is_active=True)
 
         for wishlist_item in wishlist_items:
-            total += (wishlist_item.product.sale_price * wishlist_item.quantity)
+            total += (wishlist_item.product.sale_price *
+                      wishlist_item.quantity)
             total_tax += wishlist_item.tax
             quantity += wishlist_item.quantity
             print(len(wishlist_items))
@@ -162,8 +160,9 @@ def wishlist(request):
         'total_tax': total_tax,
         'total': total,
     }
-    
+
     return render(request, 'sales/wishlist.html', context)
+
 
 @login_required(login_url='login')
 def add_to_wishlist(request, pk):
@@ -173,7 +172,8 @@ def add_to_wishlist(request, pk):
 
         # Check if the product is already in the wishlist
         try:
-            wishlist_item = WishlistItem.objects.get(product=product, wishlist=wishlist)
+            wishlist_item = WishlistItem.objects.get(
+                product=product, wishlist=wishlist)
 
             # Product already in the wishlist, update quantity and tax
             wishlist_item.quantity += 1
@@ -208,14 +208,14 @@ def add_to_wishlist(request, pk):
     return redirect('wishlist')
 
 
-
 def remove_wishlist_item(request, pk):
     user = request.user  # Get the User instance
 
     try:
         wishlist = Wishlist.objects.get(user=user)
         product = get_object_or_404(Product, id=pk)
-        wishlist_item = WishlistItem.objects.get(product=product, wishlist=wishlist)
+        wishlist_item = WishlistItem.objects.get(
+            product=product, wishlist=wishlist)
 
         if wishlist_item.quantity > 1:
             # Decrease quantity
@@ -230,23 +230,28 @@ def remove_wishlist_item(request, pk):
 
     return redirect('wishlist')
 
+
 @login_required(login_url='login')
 def add_wishlist_to_cart(request, pk):
     user = request.user
-    
+
     try:
         wishlist = Wishlist.objects.get(user=user)
-        product = Product.objects.get(pk=pk)  # Retrieve the Product based on pk
+        # Retrieve the Product based on pk
+        product = Product.objects.get(pk=pk)
 
         # Retrieve the WishlistItem based on the product and wishlist
         try:
-            wishlist_item = WishlistItem.objects.get(product=product, wishlist=wishlist, is_active=True)
+            wishlist_item = WishlistItem.objects.get(
+                product=product, wishlist=wishlist, is_active=True)
             print("Wishlist Item Product:", wishlist_item.product)
 
-            cart, created = Cart.objects.get_or_create(cart_id=_cart_id(request))
+            cart, created = Cart.objects.get_or_create(
+                cart_id=_cart_id(request))
 
             try:
-                cart_item = CartItem.objects.get(cart=cart, product=wishlist_item.product)
+                cart_item = CartItem.objects.get(
+                    cart=cart, product=wishlist_item.product)
 
                 # Update existing cart item
                 cart_item.quantity += wishlist_item.quantity
@@ -279,7 +284,8 @@ def delete_wishlist_item(request, pk):
     wishlist = Wishlist.objects.get(user=user)
     product = get_object_or_404(Product, id=pk)
     try:
-        wishlist_item = WishlistItem.objects.get(product=product, wishlist=wishlist, is_active=True)
+        wishlist_item = WishlistItem.objects.get(
+            product=product, wishlist=wishlist, is_active=True)
         wishlist_item.delete()
 
     except WishlistItem.DoesNotExist:

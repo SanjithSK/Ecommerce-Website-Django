@@ -3,8 +3,10 @@
 <style>
 
 input[type="range"]::-webkit-slider-runnable-track {
-    color: #55508b;
+    color: #fff;
+    background-color: #55508b;
 }
+
 </style>
 
 <!-- filter offcanvas area start -->
@@ -632,14 +634,18 @@ input[type="range"]::-webkit-slider-runnable-track {
               <form method="get">
                 
                   <div class="slider-container">
-                      
-                      <input type="range" name="min_price" min="0" max="1000" step="1" value="{{ min_price }}" oninput="updateSliderValue('min-slider-value', this.value)">
+
                       <span id="min-slider-value">{{ min_price }}</span>
                       <span>₹</span>
                       
-                      <input type="range" class="ui-slider-range ui-corner-all ui-widget-header" name="max_price" min="0" max="1000" step="1" value="{{ max_price }}" oninput="updateSliderValue('max-slider-value', this.value)">
-                      <span id="max-slider-value">{{ max_price }}</span>
+                      <input type="range" name="min_price" min="0" max="100000" step="1" value="{{ min_price }}" oninput="updateSliderValue('min-slider-value', this.value)" style="color: #fff;">
+                      
+                      
                       <span>₹</span>
+                      <span id="max-slider-value">{{ max_price }}</span>
+                      <input type="range" class="ui-slider-range ui-corner-all ui-widget-header" name="max_price" min="0" max="100000" step="1" value="{{ max_price }}" oninput="updateSliderValue('max-slider-value', this.value)">
+                      
+                      
                       
                   </div>
                   <button type="submit" class="tp-shop-widget-filter-btn" style="margin-bottom: 3rem;">Apply</button>
@@ -3073,9 +3079,8 @@ input[type="range"]::-webkit-slider-runnable-track {
 </script>
 
 <script>
-  // Get the minimum and maximum price values from your backend (e.g., using context)
   const minPrice = 0; // Replace with your actual minimum price
-  const maxPrice = 1000; // Replace with your actual maximum price
+  const maxPrice = 100000; // Replace with your actual maximum price
 
   const sliderRange = document.getElementById("slider-range");
   const amountInput = document.getElementById("amount");
@@ -3103,6 +3108,14 @@ input[type="range"]::-webkit-slider-runnable-track {
       window.location.href.split("?")[0] +
       `?min_price=${selectedRange[0]}&max_price=${selectedRange[1]}`;
     window.location.href = url;
+  });
+
+  // Ensure that slider values are retained during interactions
+  sliderRange.noUiSlider.on("start", function (values) {
+    const selectedRange = sliderRange.noUiSlider.get();
+    sliderRange.noUiSlider.updateOptions({
+      start: selectedRange,
+    });
   });
 </script>
 
