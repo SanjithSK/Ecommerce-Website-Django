@@ -22,6 +22,8 @@ class Product(models.Model):
         'Category', on_delete=models.SET_NULL, null=True, blank=True)
     sub_category = models.ForeignKey(
         'Sub_Category', on_delete=models.SET_NULL, null=True, blank=True)
+    brand = models.ForeignKey(
+        'Brand', on_delete=models.SET_NULL, null=True, blank=True)
     sku = models.CharField(max_length=50, unique=True, blank=True)
     total_stock = models.PositiveIntegerField(default=0)
     # slug = models.SlugField(max_length=200, unique=True)
